@@ -26,18 +26,26 @@ var collection = {
 };
 
 function updateRecords(id, prop, value) {
-  
-  console.log();
-  console.log("AFTER EACH UPDATE");
+
+  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+  console.log("\t\t\tAFTER EACH UPDATE");
 
   //Check for ' album ' and ' artist '. Then we can just insert as necessary
   if(prop !== "tracks" && value !== "")
   {
     collection[id][prop] = value;
     console.log(">>>ID: " + id + "\n THE VALUE " + "' " + value + " '" + " WAS ADDED TO THE PROP " + "' " + prop + " '" + ".");
+    console.log();
   }
- 
-  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+  //Here we're checking to see if a record has the prop/attribute ' tracks '.
+  if(prop == "tracks" && collection[id][prop] == undefined)
+  {
+    collection[id][prop] = []
+    collection[id][prop].push(value);
+    console.log(">>> ID: " + id + "\n THE PROP " + "' " + prop + " '" + " AND THE VALUE " + "' " + value + " '"  + " WERE ADDED.");
+    console.log();
+  }
+  
   return collection;
 }
 
@@ -46,15 +54,16 @@ function updateRecords(id, prop, value) {
 //value: what should be inserted, or deleted
 
 console.log(updateRecords(5439, "artist", "ABBA"));
-
+console.log(updateRecords(5439, "tracks", "Take a Chance on Me"));
 
 
 OUTPUT
 =====================================================================================================
-AFTER EACH UPDATE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			AFTER EACH UPDATE
 >>>ID: 5439
  THE VALUE ' ABBA ' WAS ADDED TO THE PROP ' artist '.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 { '1245': { artist: 'Robert Palmer', tracks: [] },
   '2468': 
    { album: '1999',
@@ -65,6 +74,21 @@ AFTER EACH UPDATE
      artist: 'Bon Jovi',
      tracks: [ 'Let It Rock', 'You Give Love a Bad Name' ] },
   '5439': { album: 'ABBA Gold', artist: 'ABBA' } }
-  
-  
-  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			AFTER EACH UPDATE
+>>> ID: 5439
+ THE PROP ' tracks ' AND THE VALUE ' Take a Chance on Me ' WERE ADDED.
+
+{ '1245': { artist: 'Robert Palmer', tracks: [] },
+  '2468': 
+   { album: '1999',
+     artist: 'Prince',
+     tracks: [ '1999', 'Little Red Corvette' ] },
+  '2548': 
+   { album: 'Slippery When Wet',
+     artist: 'Bon Jovi',
+     tracks: [ 'Let It Rock', 'You Give Love a Bad Name' ] },
+  '5439': 
+   { album: 'ABBA Gold',
+     artist: 'ABBA',
+     tracks: [ 'Take a Chance on Me' ] } }
