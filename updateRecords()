@@ -26,14 +26,45 @@ var collection = {
 };
 
 function updateRecords(id, prop, value) {
+  
+  console.log();
+  console.log("AFTER EACH UPDATE");
+
+  //Check for ' album ' and ' artist '. Then we can just insert as necessary
+  if(prop !== "tracks" && value !== "")
+  {
+    collection[id][prop] = value;
+    console.log(">>>ID: " + id + "\n THE VALUE " + "' " + value + " '" + " WAS ADDED TO THE PROP " + "' " + prop + " '" + ".");
+  }
+ 
+  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
   return collection;
 }
 
 //id: to specify which record
 //prop: album, artist, or track; attribute where the insertion/deletion will happen
 //value: what should be inserted, or deleted
+
 console.log(updateRecords(5439, "artist", "ABBA"));
 
 
 
-
+OUTPUT
+=====================================================================================================
+AFTER EACH UPDATE
+>>>ID: 5439
+ THE VALUE ' ABBA ' WAS ADDED TO THE PROP ' artist '.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{ '1245': { artist: 'Robert Palmer', tracks: [] },
+  '2468': 
+   { album: '1999',
+     artist: 'Prince',
+     tracks: [ '1999', 'Little Red Corvette' ] },
+  '2548': 
+   { album: 'Slippery When Wet',
+     artist: 'Bon Jovi',
+     tracks: [ 'Let It Rock', 'You Give Love a Bad Name' ] },
+  '5439': { album: 'ABBA Gold', artist: 'ABBA' } }
+  
+  
+  
